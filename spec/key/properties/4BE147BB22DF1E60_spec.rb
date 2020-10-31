@@ -47,7 +47,13 @@ describe Rnp::Key do
     end
 
     it 'raises an error when requesting primary userid' do
-      expect(key.primary_userid).to eql 'test1'
+      if LibRnp::HAVE_RNP_VERSION &&
+          (LibRnp::rnp_version >= LibRnp::rnp_version_for(0, 14, 0) ||
+          LibRnp::rnp_version_commit_timestamp >= 1604156729)
+        expect { key.primary_userid }.to raise_error(Rnp::Error)
+      else
+        expect(key.primary_userid).to eql "test1"
+      end
     end
 
     describe Rnp::Key.instance_method(:each_userid) do
