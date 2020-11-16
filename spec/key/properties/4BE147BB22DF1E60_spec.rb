@@ -47,6 +47,9 @@ describe Rnp::Key do
     end
 
     it 'raises an error when requesting primary userid' do
+      puts "HAVE_RNP_VERSION: ", LibRnp::HAVE_RNP_VERSION
+      puts "LibRnp::rnp_version: ", LibRnp::rnp_version
+      puts "LibRnp::rnp_version_commit_timestamp", LibRnp::rnp_version_commit_timestamp
       if LibRnp::HAVE_RNP_VERSION &&
           (LibRnp::rnp_version >= LibRnp::rnp_version_for(0, 14, 0) ||
           LibRnp::rnp_version_commit_timestamp >= 1604156729)
